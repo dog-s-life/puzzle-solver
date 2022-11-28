@@ -99,6 +99,8 @@ solveButton.addEventListener('click', ev => {
 
     const worker = new Worker('./js/solve.js');
     worker.onmessage = ev => {
+        worker.terminate();
+
         const steps = ev.data;
 
         solveButton.value = 'Solve';
