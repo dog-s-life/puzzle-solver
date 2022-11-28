@@ -1,0 +1,69 @@
+#input {
+    display: flex;
+    gap: 40px;
+}
+
+.quiz-container {
+    width: fit-content;
+}
+
+#quiz {
+    width: 100px;
+}
+
+#goal {
+    width: 100px;
+}
+
+#trial {
+    width: 30px;
+}
+
+.puzzle td {
+    width: 50px;
+    height: 50px;
+    border: 1px solid gray;
+    text-align: center;
+}
+
+.puzzle .puzzle-1 {
+    background-color: red;
+}
+
+.puzzle .puzzle-1::before {
+    content: "1";
+}
+
+.puzzle .puzzle-2 {
+    background-color: blue;
+}
+
+.puzzle .puzzle-2::before {
+    content: "2";
+}
+
+.puzzle .puzzle-3 {
+    background-color: green;
+}
+
+.puzzle .puzzle-3::before {
+    content: "3";
+}
+
+.puzzle .puzzle-4 {
+    background-color: beige;
+}
+
+.puzzle .puzzle-4::before {
+    content: "4";
+}
+
+.puzzle .puzzle-x,
+.puzzle .puzzle-unknown {
+    background-color: transparent;
+    border: unset;
+}
+
+.puzzle .puzzle-x::before {
+    content: "❌";
+}
