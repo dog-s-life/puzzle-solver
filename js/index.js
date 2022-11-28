@@ -30,7 +30,6 @@ function isQuizValid(str) {
 }
 
 function isGoalValid(qz, str) {
-    console.log(qz, str);
     if (!isQuizValid(str)) {
         return false;
     }
@@ -88,31 +87,48 @@ goalDom.addEventListener('input', ev => {
 updateQuizPuzzle();
 updateGoalPuzzle();
 
-document.getElementById('solve').addEventListener('click', ev => {
+const solveButton = document.getElementById('solve');
+solveButton.addEventListener('click', ev => {
     ev.preventDefault();
 
     const resultDom = document.getElementById('result');
     resultDom.innerHTML = '';
 
-    const steps = solve(document.getElementById('quiz').value, document.getElementById('goal').value, document.getElementById('trial').valueAsNumber);
-    if (!steps) {
-        //
+    solveButton.disabled = true;
+    solveButton.value = 'Solving...';
 
-        return;
-    }
+    const worker = new Worker('./js/solve.js');
+    worker.onmessage = ev => {
+        const steps = ev.data;
 
-    resultDom.appendChild(document.createElement('hr'))
-
-    steps.forEach((step, index) => {
-        if (!index) {
+        solveButton.value = 'Solve';
+        solveButton.disabled = false;
+    
+        if (!steps) {
+            alert('solution not found OTL');
+    
             return;
         }
+    
+        resultDom.appendChild(document.createElement('hr'))
+    
+        steps.forEach((step, index) => {
+            if (!index) {
+                return;
+            }
+    
+            const stepDom = document.createElement('div');
+    
+            stepDom.innerHTML = `Step #${index}`;
+            stepDom.appendChild(createPuzzleDom(step));
+    
+            resultDom.appendChild(stepDom);
+        });    
+    };
 
-        const stepDom = document.createElement('div');
-
-        stepDom.innerHTML = `Step #${index}`;
-        stepDom.appendChild(createPuzzleDom(step));
-
-        resultDom.appendChild(stepDom);
-    });    
+    worker.postMessage({
+        quiz: document.getElementById('quiz').value,
+        goal: document.getElementById('goal').value,
+        maxTrial: document.getElementById('trial').valueAsNumber
+    });
 });

@@ -100,3 +100,11 @@ function solve(input, goal, maxTrial = 30) {
     const out = results.sort((a, b) => a.length - b.length);
     return out[0];
 }
+
+self.onmessage = e  => {
+    const { quiz, goal, maxTrial } = e.data;
+
+    const result = solve(quiz, goal, maxTrial);
+
+    self.postMessage(result);
+};
