@@ -20,6 +20,7 @@
 }
 
 .puzzle td {
+    font-size: 20px;
     width: 50px;
     height: 50px;
     border: 1px solid gray;
@@ -27,7 +28,8 @@
 }
 
 .puzzle .puzzle-1 {
-    background-color: red;
+    background: #db332a;
+    color: #fafafa;
 }
 
 .puzzle .puzzle-1::before {
@@ -35,7 +37,8 @@
 }
 
 .puzzle .puzzle-2 {
-    background-color: blue;
+    background: #0381fe;
+    color: #fafafa;
 }
 
 .puzzle .puzzle-2::before {
@@ -43,7 +46,8 @@
 }
 
 .puzzle .puzzle-3 {
-    background-color: green;
+    background: #14a866;
+    color: #fafafa;
 }
 
 .puzzle .puzzle-3::before {
@@ -51,7 +55,8 @@
 }
 
 .puzzle .puzzle-4 {
-    background-color: beige;
+    background: #fafafa;
+    color: #010101;
 }
 
 .puzzle .puzzle-4::before {
@@ -60,7 +65,7 @@
 
 .puzzle .puzzle-x,
 .puzzle .puzzle-unknown {
-    background-color: transparent;
+    background: transparent;
     border: unset;
 }
 
