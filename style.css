@@ -20,14 +20,15 @@
 }
 
 .puzzle td {
-    font-size: 20px;
+    font-size: 19px;
     width: 50px;
     height: 50px;
     border: 1px solid gray;
     text-align: center;
 }
 
-.puzzle .puzzle-1 {
+.puzzle .puzzle-1,
+.puzzle .puzzle-r {
     background: #db332a;
     color: #fafafa;
 }
@@ -36,7 +37,12 @@
     content: "1";
 }
 
-.puzzle .puzzle-2 {
+.puzzle .puzzle-r::before {
+    content: "R";
+}
+
+.puzzle .puzzle-2,
+.puzzle .puzzle-b {
     background: #0381fe;
     color: #fafafa;
 }
@@ -45,7 +51,12 @@
     content: "2";
 }
 
-.puzzle .puzzle-3 {
+.puzzle .puzzle-b::before {
+    content: "B";
+}
+
+.puzzle .puzzle-3,
+.puzzle .puzzle-g {
     background: #14a866;
     color: #fafafa;
 }
@@ -54,13 +65,22 @@
     content: "3";
 }
 
-.puzzle .puzzle-4 {
+.puzzle .puzzle-g::before {
+    content: "G";
+}
+
+.puzzle .puzzle-4,
+.puzzle .puzzle-w {
     background: #fafafa;
     color: #010101;
 }
 
 .puzzle .puzzle-4::before {
     content: "4";
+}
+
+.puzzle .puzzle-w::before {
+    content: "W";
 }
 
 .puzzle .puzzle-x,
