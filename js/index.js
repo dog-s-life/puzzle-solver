@@ -1,7 +1,7 @@
 const param = new URLSearchParams(window.location.search);
 
-const quiz = param.get('quiz') || '1232431X4';
-const goal = param.get('goal') || '4124213X3';
+const quiz = param.get('quiz') || 'rbgbwgrxw';
+const goal = param.get('goal') || 'wrbwbrgxg';
 const trial = param.get('max') || '30';
 
 const quizDom = document.getElementById('quiz');
@@ -11,14 +11,18 @@ document.getElementById('trial').value = trial;
 quizDom.value = quiz;
 goalDom.value = goal;
 
+function normalize(str) {
+    return str.toLowerCase().replace(/1/g, 'r').replace(/2/g, 'b').replace(/3/g, 'g').replace(/4/g, 'w');
+}
+
 function isQuizValid(str) {
     if (str.length !== 9 && str.length !== 16) {
         return false;
     }
     
-    str = str.toLowerCase();
+    str = normalize(str);
     
-    if (/[^1-4x]/g.exec(str)) {
+    if (/[^1-4xrgbw]/g.exec(str)) {
         return false;
     }
 
@@ -34,8 +38,8 @@ function isGoalValid(qz, str) {
         return false;
     }
 
-    const src = [...(qz.toLowerCase())].sort();
-    const dst = [...(str.toLowerCase())].sort();
+    const src = [...(normalize(qz))].sort();
+    const dst = [...(normalize(str))].sort();
 
     return src.every((ch, index) => ch === dst[index]);
 }
@@ -73,13 +77,13 @@ const updateGoalPuzzle = () => {
 }
 
 quizDom.addEventListener('input', ev => {
-    ev.target.value = ev.target.value.replace(/[^1-4xX]/g, '');
+    ev.target.value = ev.target.value.replace(/[^1-4xrgbw]/gi, '');
 
     updateQuizPuzzle();
 });
 
 goalDom.addEventListener('input', ev => {
-    ev.target.value = ev.target.value.replace(/[^1-4xX]/g, '');
+    ev.target.value = ev.target.value.replace(/[^1-4xrgbw]/gi, '');
 
     updateGoalPuzzle();
 });
@@ -129,8 +133,8 @@ solveButton.addEventListener('click', ev => {
     };
 
     worker.postMessage({
-        quiz: document.getElementById('quiz').value,
-        goal: document.getElementById('goal').value,
+        quiz: normalize(document.getElementById('quiz').value),
+        goal: normalize(document.getElementById('goal').value),
         maxTrial: document.getElementById('trial').valueAsNumber
     });
 });
